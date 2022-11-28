@@ -10,7 +10,8 @@ This bot uses my base
 - all the basic features of [g-bot-bootstrap](https://github.com/Nikappa57/tg-bot-bootstrap)
 - a shop to buy account
 - create a public give on your channel
-the user will be sent to the bot and the first will take the credentials in private chat
+
+    The user will be sent to the bot and the first will take the credentials in private chat
 - monthly account expiration management
 
 ## Installation
