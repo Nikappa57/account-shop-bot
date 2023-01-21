@@ -1,8 +1,6 @@
 from random import randint
-from emoji import emojize
 
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-from Bot.utils.bot_emoji import Emoji
 
 from config import Config
 from Bot.errors import unknown
@@ -18,10 +16,11 @@ from Bot.utils.chat import Chat
 @checkuser.check()
 def start(update, context, currentuser):
     message = update.message.text
-    if not context.bot.get_chat_member(Config.channel, currentuser.chat_id).status in ['member', 'creator', 'administrator']:
+    if not context.bot.get_chat_member(Config.channel, 
+        currentuser.chat_id).status in ['member', 'creator', 'administrator']:
         update.message.reply_text(
-            f"{Emoji.flag}<b>HEY</b>{Emoji.flag}\n\n{Emoji.lock}To access this bot," + \
-                f" you have to join our Telegram channel.\n{Emoji.check_1}Click below!", 
+            "🚫<b>HEY</b>🚫\n\n🔒To access this bot," + \
+                " you have to join our Telegram channel.\n⬇️Click below!", 
             reply_markup=InlineKeyboardMarkup(BotKeyboard.JoinChannelKeyBoard)
         )
         return
@@ -33,17 +32,19 @@ def start(update, context, currentuser):
             update.message.reply_text("welcome back Admin")
         elif args[0] == "sendAccount":
             Chat.sendAccount[currentuser.chat_id] = {
-                'chat_id': int(args[1]), 'Plan': int(args[2]), 'Account': args[3], 'Renew': False}
+                'chat_id': int(args[1]), 'Plan': int(args[2]), 
+                    'Account': args[3], 'Renew': False}
             update.message.reply_text("Now send the account")
         elif args[0] == "renewAccount":
-            Chat.sendAccount[currentuser.chat_id] = {'chat_id': int(args[1]), 'Renew': True, 'Account': args[2]}
+            Chat.sendAccount[currentuser.chat_id] = {'chat_id': int(args[1]), 
+                'Renew': True, 'Account': args[2]}
             update.message.reply_text("Now send the account")
         else:
             update.message.reply_text("You are admin, you cannot take accounts")
 
     elif "_" not in message:
         reply_markup = InlineKeyboardMarkup(BotKeyboard.StartKeyBoard)
-        mex = f"{Emoji.robot}<i>welcome to @{Config.bot_username}!</i>\n\n{Emoji.eyes}" + \
+        mex = f"🤖<i>welcome to @{Config.bot_username}!</i>\n\n👀" + \
                 "<i>Below are buttons for moving in the Bot.</i>"
 
         context.bot.send_photo(
@@ -64,7 +65,7 @@ def start(update, context, currentuser):
             if args[0] == "give":
                 if args[1] == "Taken":
                     reply_markup = InlineKeyboardMarkup(BotKeyboard.StartKeyBoard)
-                    mex = f"{Emoji.point} <b>WE'RE SORRY</b> {Emoji.point}\n\n{Emoji.x} " + \
+                    mex = "❗️ <b>WE'RE SORRY</b> ❗️\n\n✖️ " + \
                             "<b>Another user before you, has redeemed the account.</b>\n\n" + \
                                 "<i>Can’t get an account for free?</i>\n<i>Click on the Shop!</i>"
                     context.bot.send_message(
@@ -89,9 +90,9 @@ def start(update, context, currentuser):
 
                     account = db.session.query(Account).get(args[1])
 
-                    mex = f"{Emoji.diamond}<b>WOW!</b>{Emoji.diamond}\n\n{Emoji.gift}<i>You managed to catch the account {account.account_type} " + \
-                            f"in time.</i>\n\n{Emoji.email} <code>{account.email}</code>\n{Emoji.lock} <code>{account.temp_password}</code>" + \
-                                f"\n\n{Emoji.worning} Before logging into the account {account.account_type}, follow our procedure\n>> {Config.guide}"
+                    mex = f"💎<b>WOW!</b>💎\n\n🎁<i>You managed to catch the account {account.account_type} " + \
+                            f"in time.</i>\n\n📨 <code>{account.email}</code>\n🔒 <code>{account.temp_password}</code>" + \
+                                f"\n\n✋ Before logging into the account {account.account_type}, follow our procedure\n>> {Config.guide}"
 
                     context.bot.send_message(
                         currentuser.chat_id,
@@ -113,9 +114,9 @@ def giveAccount(update, context, currentuser):
         if account_type.lower() in Config.give_account.keys():
             img = f"<a href='{Config.give_account[account_type.lower()]['img']}'> </a>"
 
-            emoji = emojize(Config.give_account[account_type.lower()]['emoji'], language='alias')
+            emoji = Config.give_account[account_type.lower()]['emoji']
 
-            mex = f"{emoji} <b>{account_type.upper()} PRIVATE</b>\n\n{Emoji.point}" + \
+            mex = f"{emoji} <b>{account_type.upper()} PRIVATE</b>\n\n❗️" + \
                     "<i>Click below to take the account</i>" + img
 
             new_account = Account(
@@ -142,7 +143,7 @@ def giveAccount(update, context, currentuser):
 
             keyboard = [
                 [
-                    InlineKeyboardButton(f"{Emoji.lock} Unlock {Emoji.lock}", url=url)
+                    InlineKeyboardButton("🔒 Unlock 🔒", url=url)
                 ],
             ]
 

@@ -1,6 +1,3 @@
-from telegram.ext.dispatcher import run_async
-
-
 def chat_groups(update, context):
     context.bot.send_message(
         update.effective_chat.id, 

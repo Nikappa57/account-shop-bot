@@ -1,11 +1,6 @@
-import re
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 
-from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
-
-from Bot.decorator import checkuser, chattype
-from Bot.database import db
-from Bot.database.models import Users
-from Bot.utils.bot_emoji import Emoji
+from Bot.decorator import checkuser
 from Bot.keyboard import BotKeyboard
 from Bot.utils.chat import Chat
 from config import Config
@@ -29,7 +24,7 @@ def button(update, context, currentuser) :
 
         reply_markup = InlineKeyboardMarkup(BotKeyboard.StartKeyBoard)
 
-        mex = f"{Emoji.robot}<i>Welcome to @{Config.bot_username}</i>\n\n{Emoji.eyes}" + \
+        mex = f"🤖<i>Welcome to @{Config.bot_username}</i>\n\n👀" + \
             "<i>Below are buttons for moving in the Bot.</i>"
 
         context.bot.send_photo(
@@ -52,7 +47,7 @@ def button(update, context, currentuser) :
 
         reply_markup = InlineKeyboardMarkup(BotKeyboard.AccountKeyBoard)
 
-        mex = f"{Emoji.bags}<b>Welcome to our shop</b>{Emoji.bags}\n\n{Emoji.flash}" + \
+        mex = "🛍<b>Welcome to our shop</b>🛍\n\n🔦" + \
             "<i>Select our service below.</i>"
 
         bot.send_message(chat_id, mex, reply_markup=reply_markup)
@@ -72,17 +67,17 @@ def button(update, context, currentuser) :
                 InlineKeyboardButton(f"6 Months ({price[1]}€)", callback_data='plan-1')
             ],
             [
-                InlineKeyboardButton(f"{Emoji.orange_diamond} 1 Year ({price[2]}€) {Emoji.orange_diamond}", callback_data='plan-2')
+                InlineKeyboardButton("💠 1 Year ({price[2]}€) 💠", callback_data='plan-2')
             ],
             [
-                InlineKeyboardButton(f"{Emoji.back} Back {Emoji.back}", callback_data='back-to-shop')
+                InlineKeyboardButton("◀️ Back ◀️", callback_data='back-to-shop')
             ],
         ]
 
         reply_markup = InlineKeyboardMarkup(PlanKeyBoard)
 
-        mex = f"{Emoji.gift}<b>Select a subscription</b>{Emoji.gift}\n\n<i>Here are our available subscriptions:</i>" + \
-            f"\n\n{Emoji.blue_diamond}<b>Monthly</b>\n{Emoji.blue_diamond}<b>half-yearly</b>\n{Emoji.orange_diamond}<b>Annual</b> <i>recommended</i>"
+        mex = "🎁<b>Select a subscription</b>🎁\n\n<i>Here are our available subscriptions:</i>" + \
+            "\n\n💠<b>Monthly</b>\n💠<b>half-yearly</b>\n💠<b>Annual</b> <i>recommended</i>"
 
         context.bot.editMessageText(
             message_id = update.callback_query.message.message_id,
@@ -103,7 +98,7 @@ def button(update, context, currentuser) :
 
         reply_markup = InlineKeyboardMarkup(BotKeyboard.PayMethodKeyBoard)
 
-        mex = f"{Emoji.card}<b>Payment method</b>{Emoji.card}\n\n<i>Select a payment method.</i>"
+        mex = "💳<b>Payment method</b>💳\n\n<i>Select a payment method.</i>"
 
         context.bot.editMessageText(
             message_id = update.callback_query.message.message_id,
@@ -125,7 +120,7 @@ def button(update, context, currentuser) :
             f"Now send the screen of the <b>PaySafeCard Code</b> di {price} €." if method == "PaySafeCard" else \
                 f"Now pay {price} € on <a href='{Config.paypal_account}'>this Paypal</a> and send the screen."
 
-        mex = f"{Emoji.money}<b>CHECKOUT</b>{Emoji.money}\n\n{Emoji.check}<b>Perfect</b> {mex_add}\n\n<b>{Emoji.bell}" + \
+        mex = f"💴<b>CHECKOUT</b>💴\n\n✔️<b>Perfect</b> {mex_add}\n\n<b>🔔" + \
             "If you’re having trouble paying, contact Support.</b>"
 
         context.bot.editMessageText(
@@ -144,7 +139,7 @@ def button(update, context, currentuser) :
         context.bot.editMessageText(
             message_id = update.callback_query.message.message_id,
             chat_id = update.callback_query.message.chat.id,
-            text = f"{Emoji.check}<b>Account required</b>{Emoji.check}\n\n<i>" + \
+            text = "✔️<b>Account required</b>✔️\n\n<i>" + \
                 "An admin will verify your request, and send you the account.</i>",
             reply_markup=reply_markup
         )

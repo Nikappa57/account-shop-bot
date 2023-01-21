@@ -3,7 +3,6 @@ from datetime import timedelta
 from Bot.decorator import chattype, checkuser
 
 from config import Config
-from Bot.utils.bot_emoji import Emoji
 from Bot.scheduled_messages import expiried_account, renew_account
 from Bot.utils.chat import Chat
 
@@ -20,9 +19,9 @@ def accountMessage(update, context, currentuser):
 
         email, password = message.split(":", 1)
 
-        mex = f"{Emoji.diamond} <b>HERE IS YOUR ACCOUNT {account.upper()}</b> {Emoji.diamond}" + \
-                f"\n\n{Emoji.email} <code>{email}</code>\n{Emoji.lock} <code>{password}</code>\n\n" + \
-                    f"{Emoji.point}<i>Before entering your account, follow these steps {Config.guide}</i>"
+        mex = f"💎 <b>HERE IS YOUR ACCOUNT {account.upper()}</b> 💎" + \
+                f"\n\n📨 <code>{email}</code>\n🔒 <code>{password}</code>\n\n" + \
+                    f"❗️<i>Before entering your account, follow these steps {Config.guide}</i>"
         
         context.bot.send_message(chat_id=chat_id_user, text=mex)
         context.bot.send_message(chat_id=chat_id, text="Account sent with success")

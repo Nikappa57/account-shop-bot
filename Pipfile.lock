@@ -39,13 +39,6 @@
             "markers": "python_version >= '3.6'",
             "version": "==2022.9.24"
         },
-        "emoji": {
-            "hashes": [
-                "sha256:a2986c21e4aba6b9870df40ef487a17be863cb7778dcf1c01e25917b7cd210bb"
-            ],
-            "index": "pypi",
-            "version": "==2.2.0"
-        },
         "python-dotenv": {
             "hashes": [
                 "sha256:1684eb44636dd462b66c3ee016599815514527ad99965de77f43e0944634a7e5",

@@ -4,7 +4,7 @@ from Bot.decorator import chattype, checkuser
 from config import Config
 from Bot.utils.chat import Chat
 from Bot.keyboard import BotKeyboard
-from Bot.utils.bot_emoji import Emoji
+
 
 @chattype.private
 @checkuser.check()
@@ -34,9 +34,9 @@ def paymentScreen(update, context, currentuser):
 
         reply_markup = InlineKeyboardMarkup(BotKeyboard.BackhomeKeyBoard)
         
-        mex = f"{Emoji.point} <b>YOU PAID YOUR ACCOUNT CORRECTLY</b> {Emoji.point}\n\n{Emoji.worning} " + \
+        mex = "❗️ <b>YOU PAID YOUR ACCOUNT CORRECTLY</b> ❗️\n\n✋ " + \
                 "<i>An admin will verify your order, and send you the login details of the requested account.</i>" + \
-                    f"\n\n{Emoji.clock} <i>It could take</i> <b>more than 48h.</b>"
+                    "\n\n🕔 <i>It could take</i> <b>more than 48h.</b>"
 
         context.bot.send_message(
             chat_id=chat_id,
