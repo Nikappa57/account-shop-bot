@@ -5,12 +5,13 @@
 A telegram bot for account sales channels.
 
 This bot uses my base 
-[g-bot-bootstrap](https://github.com/Nikappa57/tg-bot-bootstrap).
+[tg-bot-bootstrap](https://github.com/Nikappa57/tg-bot-bootstrap).
 ## Features
-- all the basic features of [g-bot-bootstrap](https://github.com/Nikappa57/tg-bot-bootstrap)
+- all the basic features of [tg-bot-bootstrap](https://github.com/Nikappa57/tg-bot-bootstrap)
 - a shop to buy account
 - create a public give on your channel
-the user will be sent to the bot and the first will take the credentials in private chat
+
+    The user will be sent to the bot and the first will take the credentials in private chat
 - monthly account expiration management
 
 ## Installation
@@ -38,3 +39,4 @@ Configure `config.py` with your information.
 Now you should be able to start your bot.
 ```console
 python run.py
+```
